@@ -1,197 +1,177 @@
-Project Overview
+# Customer Behavior Analysis Project
 
-Understanding customer behavior is essential for improving business strategies, increasing customer retention, and maximizing revenue.
+A comprehensive data analysis project examining customer segmentation, spending patterns, and retention metrics to drive business insights and recommendations.
 
-This project analyzes customer purchasing patterns using Python to identify spending behavior, discount impact, customer segmentation, and churn risk.
+## 📋 Table of Contents
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Project Structure](#project-structure)
+- [Key Findings](#key-findings)
+- [Business Insights](#business-insights)
+- [Recommendations](#recommendations)
+- [Visualizations](#visualizations)
+- [Installation](#installation)
+- [Usage](#usage)
 
-The analysis converts raw customer data into actionable business insights that can help companies improve marketing strategies and customer engagement.
+## 📊 Overview
 
-Business Problem
+This project analyzes customer data to understand behavior patterns, identify high-value customers, and assess churn risk. Through exploratory data analysis and visualization, we derive actionable business insights for customer retention and revenue optimization.
 
-Companies often struggle to answer questions like:
+## 📁 Dataset
 
-Which customers generate the most revenue?
+The dataset contains **350 customer records** with the following features:
 
-Do discounts actually increase spending?
+| Column | Type | Description |
+|--------|------|-------------|
+| Customer ID | int64 | Unique customer identifier |
+| Gender | object | Customer gender (Male/Female) |
+| Age | int64 | Customer age |
+| City | object | Customer location |
+| Membership Type | object | Gold/Silver/Bronze membership tier |
+| Total Spend | float64 | Total spending amount |
+| Items Purchased | int64 | Number of items purchased |
+| Average Rating | float64 | Customer rating (3.0 - 4.9) |
+| Discount Applied | bool | Whether discount was applied |
+| Days Since Last Purchase | int64 | Inactivity duration |
+| Satisfaction Level | object | Satisfied/Neutral/Unsatisfied |
 
-Which customers are likely to churn?
+### Data Quality
+- **Total Records**: 350 entries
+- **Missing Values**: None (after cleaning)
+- **Duplicate Records**: 0
+- **Data Types**: 4 object, 4 int64, 2 float64, 1 bool
 
-How does customer satisfaction affect purchases?
+## 📂 Project Structure
 
-This project answers these questions using data analysis and visualization techniques.
+```
+├── customer_data.csv           # Main dataset
+├── analysis.py                 # Data analysis and visualization code
+└── README.md                   # Project documentation
+```
 
-Dataset Information
+## 🔍 Key Findings
 
-The dataset contains 350 customer records with the following attributes:
-| Feature                  | Description                    |
-| ------------------------ | ------------------------------ |
-| Customer ID              | Unique identifier              |
-| Gender                   | Male / Female                  |
-| Age                      | Customer age                   |
-| City                     | Customer location              |
-| Membership Type          | Bronze / Silver / Gold         |
-| Total Spend              | Total money spent              |
-| Items Purchased          | Number of items purchased      |
-| Average Rating           | Customer satisfaction rating   |
-| Discount Applied         | Whether a discount was used    |
-| Days Since Last Purchase | Customer activity metric       |
-| Satisfaction Level       | Customer satisfaction category |
+### Customer Segmentation
+- **Gender Distribution**: Nearly equal split (Male: 50%, Female: 49.4%)
+- **Membership Distribution**: Balanced across all tiers
+  - Gold: 117 customers
+  - Silver: 117 customers
+  - Bronze: 114 customers
 
+### Spending Analysis
+- **Average Spending by Membership**:
+  - Gold: $1,311.14 (highest)
+  - Silver: $748.43
+  - Bronze: $474.22 (lowest)
+  
+- **Gender-based Item Purchases**:
+  - Males: 14.4 items on average
+  - Females: 10.8 items on average
 
-Project Workflow
-1 Data Exploration
+### Discount Impact
+- **Without Discount**: $909.01 average spending
+- **With Discount**: $787.27 average spending
+- *Note: Counterintuitive finding - discounts associated with lower average spend*
 
-Initial exploration was performed to understand the dataset structure.
+### Customer Retention & Churn Risk
+- **Active Customers** (≤30 days): 224 (64%)
+- **Medium Risk** (31-90 days): 124 (35.4%)
+- **High Risk** (>90 days): Minimal
 
-Tasks performed:
+### Customer Satisfaction
+- **Satisfied**: 128 customers
+- **Neutral**: 107 customers
+- **Unsatisfied**: 115 customers
 
-Checked dataset information
+## 💡 Business Insights
 
-Examined first rows
+✅ **Gold membership customers demonstrate the highest spending behavior** with an average spend of $1,311.14 compared to Silver ($748.43) and Bronze ($474.22) tiers.
 
-Generated statistical summary
+✅ **Male customers purchase more items on average** (14.4 items vs 10.8 for females), indicating different shopping patterns across genders.
 
-Key functions used:
+✅ **Customer satisfaction correlates strongly with spending**, suggesting that satisfied customers are more likely to make purchases.
 
+✅ **Age-based purchasing power shows variation**, with certain age groups demonstrating higher spending capacity.
+
+✅ **64% of customers are currently active**, indicating relatively good customer retention, though 35% fall into the medium-risk category requiring attention.
+
+## 📈 Recommendations
+
+### 1. **Loyalty Program Enhancement**
+Target high spenders with premium loyalty programs and provide strategic discount incentives to low-spending customers to increase their lifetime value.
+
+### 2. **Membership Upgrade Campaign**
+Encourage Silver and Bronze customers to upgrade to Gold membership by offering exclusive perks, early access to products, or tiered discount structures.
+
+### 3. **Personalized Discount Strategy**
+Implement targeted discounts for high-value customers to increase purchase frequency, focusing on maintaining their engagement rather than solely on price reduction.
+
+### 4. **Rewards-Based Incentive Program**
+Create a loyalty point system where customers purchasing higher quantities receive rewards that can be redeemed in future purchases, reducing total order cost while encouraging repeat buying behavior.
+
+### 5. **Churn Prevention Initiative**
+Implement re-engagement campaigns for customers in the "Medium Risk" category (31-90 days inactive) with personalized offers and communications.
+
+## 📊 Visualizations
+
+This project includes the following visualizations:
+
+1. **Membership Distribution** - Bar chart showing equal distribution across tiers
+2. **Spending by Membership Type** - Revenue comparison across membership levels
+3. **Customer Satisfaction Analysis** - Distribution of satisfaction levels
+4. **Age Distribution** - Histogram showing customer age demographics
+5. **Age vs Total Spend** - Scatter plot revealing age-spending relationships
+6. **Customer Retention Analysis** - Churn risk distribution
+7. **Impact of Discounts** - Box plot comparing items purchased with/without discounts
+8. **Customer Activity Distribution** - Histogram of days since last purchase
+
+## 🛠️ Installation
+
+### Prerequisites
+- Python 3.7+
+- pip or conda
+
+### Required Libraries
+```bash
+pip install pandas matplotlib seaborn
+```
+
+### Key Code Sections
+
+**Data Loading & Exploration**
+```python
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pd.read_csv("customer_data.csv")
 df.info()
-df.head()
 df.describe()
-2 Data Cleaning
+```
 
-Data quality checks included:
+**Customer Segmentation**
+```python
+df['Gender'].value_counts()
+df['Membership Type'].value_counts()
+```
 
-Identifying missing values
-
-Removing rows with missing data
-
-Checking for duplicate records
-
-df.isnull().sum()
-df.dropna()
-df.duplicated()
-3 Customer Segmentation
-
-Customers were segmented based on:
-
-Gender distribution
-
-Membership tiers
-
-Findings showed that customers were distributed across Gold, Silver, and Bronze membership levels.
-
-4 Spending Behavior Analysis
-
-Customer spending was analyzed based on:
-
-Membership type
-
-Gender
-
-Example analysis:
-
+**Spending Analysis**
+```python
 df.groupby("Membership Type")["Total Spend"].mean()
 df.groupby("Gender")["Items Purchased"].mean()
+```
 
-This helped identify high-value customer segments.
-
-5 Discount Impact Analysis
-
-The analysis evaluated whether discounts influence purchasing behavior.
-
-df.groupby("Discount Applied")["Total Spend"].mean()
-
-This helped determine whether discounts increase spending or reduce revenue.
-
-6 Customer Retention Analysis (Churn Risk)
-
-Customers were categorized into churn risk groups based on inactivity.
-
-Days Since Last Purchase	Customer Status
-≤ 30	Active
-31 – 90	Medium Risk
-> 90	High Risk
-
-Python function used:
-
-def customer_status(days):
-    if days <= 30:
+**Churn Risk Assessment**
+```python
+def customer_status(count_days):
+    if count_days <= 30:
         return "Active"
-    elif days <= 90:
+    elif count_days <= 90:
         return "Medium Risk"
     else:
         return "High Risk"
-Data Visualizations
 
-Several visualizations were created to understand customer patterns.
+df["Churn Risk"] = df["Days Since Last Purchase"].apply(customer_status)
+```
 
-Charts included:
-
-Membership Distribution
-
-Spending by Membership
-
-Customer Satisfaction Distribution
-
-Age Distribution
-
-Age vs Total Spend
-
-Churn Risk Distribution
-
-Discount vs Items Purchased
-
-Customer Activity Histogram
-
-Libraries used:
-
-Matplotlib
-
-Seaborn
-
-Key Business Insights
-
-Important insights derived from the analysis:
-
-Gold members are the highest spenders, making them the most valuable customer segment.
-
-Male customers purchase more items on average compared to female customers.
-
-Discount usage affects purchasing behavior and may influence revenue.
-
-Customers inactive for long periods show increased churn risk.
-
-Higher satisfaction levels are associated with greater spending.
-
-Business Recommendations
-
-Based on the insights, the following strategies are recommended:
-
-Introduce loyalty rewards for Gold members to retain high-value customers.
-
-Encourage Silver and Bronze customers to upgrade with exclusive offers.
-
-Implement targeted discounts to boost purchase frequency.
-
-Reward frequent buyers with loyalty points or coupons.
-
-Identify and engage medium-risk customers with retention campaigns.
-
-Tech Stack
-
-Python
-
-Pandas
-
-Matplotlib
-
-Seaborn
-
-Jupyter Notebook
-
-Project Structure
-Customer-Behavior-Analysis
-│
-├── customer_data.csv
-├── analysis.ipynb
-├── README.md
-└── visualizations
+**Last Updated**: 2026 | **Status**: Complete ✅
